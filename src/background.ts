@@ -4,3 +4,9 @@ function polling() {
 }
 
 polling();
+
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+  if (info.status === "complete" && tab.active) {
+    chrome.tabs.sendMessage(tabId, { get: "body" });
+  }
+});

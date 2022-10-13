@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
 const Popup = () => {
-  const [count, setCount] = useState(0);
-  const [currentURL, setCurrentURL] = useState<string>();
   const [reload, setReload] = useState<boolean>(false);
 
   let interval: NodeJS.Timer;
 
   useEffect(() => {
-    chrome.action.setBadgeText({ text: count.toString() });
-  }, [count]);
-
-  useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      setCurrentURL(tabs[0].url);
-    });
+    return () => {
+      setReload(false);
+      clearInterval(interval);
+    };
   }, []);
 
   const toggleReload = () => {
@@ -26,7 +21,7 @@ const Popup = () => {
       setReload(true);
       interval = setInterval(() => {
         sendReload();
-        console.log('runned');
+        console.log("runned");
       }, 10000);
     }
   };
@@ -41,7 +36,7 @@ const Popup = () => {
             reload: true,
           },
           (msg) => {
-            console.log('result message:', msg);
+            console.log("result message:", msg);
           }
         );
       }
@@ -58,7 +53,7 @@ const Popup = () => {
             restart: true,
           },
           (msg) => {
-            console.log('result message:', msg);
+            console.log("result message:", msg);
           }
         );
       }
@@ -67,17 +62,10 @@ const Popup = () => {
 
   return (
     <>
-      <ul style={{ minWidth: '700px' }}>
-        <li>Current URL: {currentURL}</li>
-        <li>Current Time: {new Date().toLocaleTimeString()}</li>
-      </ul>
-      <button onClick={() => setCount(count + 1)} style={{ marginRight: '5px' }}>
-        count up
-      </button>
       {reload ? (
         <p>Reloading</p>
       ) : (
-        <button onClick={toggleReload} style={{ marginRight: '5px' }}>
+        <button onClick={toggleReload} style={{ marginRight: "5px" }}>
           Start reload
         </button>
       )}
@@ -90,5 +78,5 @@ ReactDOM.render(
   <React.StrictMode>
     <Popup />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
