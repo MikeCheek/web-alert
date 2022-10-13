@@ -15,15 +15,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if ((msg.get = "body")) {
     if (document) {
       window.scrollTo(0, 5000);
-      const bodyHtml = document.body.innerHTML.toLowerCase();
-      tabooWords.forEach((word) => {
-        if (bodyHtml.includes(word)) {
-          console.log("found " + word);
-          return;
-        }
-      });
+      const html = document.body.innerHTML.toLowerCase();
+      console.log(html);
+      // tabooWords.forEach((word) => {
+      //   if (html.includes(word)) {
+      //     console.log("found " + word);
+      //   }
+      // });
       words.forEach((word) => {
-        if (bodyHtml.includes(word)) {
+        if (html.includes(word)) {
           stopped = true;
           console.log(
             "found " +
@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
               ", I stopped reloading\n Click restart to continue searching"
           );
           if ("Notification" in window) {
-            if (window.Notification.permission === "denied")
+            if (window.Notification.permission != "granted")
               window.Notification.requestPermission().then((permission) => {
                 if (permission === "granted")
                   new window.Notification("Found " + word);
