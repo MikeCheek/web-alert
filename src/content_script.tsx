@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if ((msg.get = "body")) {
     if (document) {
       window.scrollTo(0, 5000);
-      const html = document.body.innerHTML.toLowerCase();
+      const html = sanitize(document.body).innerHTML.toLowerCase();
       console.log(html);
       // tabooWords.forEach((word) => {
       //   if (html.includes(word)) {
@@ -59,3 +59,15 @@ const reloadAndCheck = () => {
 //     });
 //   }
 // });
+
+const sanitize = (html: HTMLElement) => {
+  let scripts = html.querySelectorAll("script");
+  for (let script of scripts) {
+    script.remove();
+  }
+  let styles = html.querySelectorAll("style");
+  for (let style of styles) {
+    style.remove();
+  }
+  return html;
+};
