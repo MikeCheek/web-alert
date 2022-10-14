@@ -1,7 +1,7 @@
 let stopped = false;
 let found = false;
 
-const words = ['libera', 'singola', 'camera', 'disponibile'];
+const words = ['libera', 'singola', 'camera', 'disponibile', 'affittasi'];
 const tabooWords = ['coinquilina', 'studentessa'];
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -46,21 +46,23 @@ const checkInNodes = (collection: HTMLCollectionOf<Element>) => {
     .forEach((element) => {
       if (!found)
         words.forEach((word) => {
-          if (element.textContent && new RegExp(`.*${word}.*`, 'gi').test(element.textContent)) found = true;
+          if (!found) {
+            if (element.textContent && new RegExp(`.*${word}.*`, 'gi').test(element.textContent)) found = true;
 
-          tabooWords.forEach((tabooWord) => {
-            console.log('runned');
-            if (element.textContent && new RegExp(`.*${tabooWord}.*`, 'gi').test(element.textContent)) found = false;
-          });
+            tabooWords.forEach((tabooWord) => {
+              console.log('runned');
+              if (element.textContent && new RegExp(`.*${tabooWord}.*`, 'gi').test(element.textContent)) found = false;
+            });
 
-          if (found) {
-            stopped = true;
-            (element as HTMLElement).style.backgroundColor = 'yellow';
-            (element as HTMLElement).style.border = 'solid red 5px';
-            (element as HTMLElement).style.borderRadius = '10px';
-            window.scrollTo(0, element.getBoundingClientRect().top);
-            console.log('found ' + word + ', I stopped reloading\n Click restart to continue searching');
-            sendNotification(word);
+            if (found) {
+              stopped = true;
+              (element as HTMLElement).style.backgroundColor = 'yellow';
+              (element as HTMLElement).style.border = 'solid red 5px';
+              (element as HTMLElement).style.borderRadius = '10px';
+              window.scrollTo(0, element.getBoundingClientRect().top);
+              console.log('found ' + word + ', I stopped reloading\n Click restart to continue searching');
+              sendNotification(word);
+            }
           }
         });
     });
