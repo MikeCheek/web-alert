@@ -1,8 +1,8 @@
 let stopped = false;
 let found = false;
 
-const words = ['libera', 'singola', 'doppia'];
-const tabooWords = ['coinquilina', 'coinquiline', 'studentesse'];
+const words = ['libera', 'singola', 'camera', 'disponibile'];
+const tabooWords = ['coinquilina', 'studentessa'];
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.reload && !stopped) {

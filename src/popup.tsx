@@ -23,7 +23,7 @@ const Popup = () => {
       interval = setInterval(() => {
         sendMessage({ reload: true });
         console.log('runned');
-      }, 20000);
+      }, 60000);
     }
   };
 
