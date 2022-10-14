@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { sendMessage } from './sendMessage';
 
 const Popup = () => {
   const [reload, setReload] = useState<boolean>(false);
@@ -20,57 +21,25 @@ const Popup = () => {
     } else {
       setReload(true);
       interval = setInterval(() => {
-        sendReload();
-        console.log("runned");
-      }, 10000);
+        sendMessage({ reload: true });
+        console.log('runned');
+      }, 20000);
     }
   };
 
-  const sendReload = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      if (tab.id) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            reload: true,
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
-    });
-  };
-
-  const sendRestart = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      if (tab.id && reload) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            restart: true,
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
-    });
-  };
-
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       {reload ? (
         <p>Reloading</p>
       ) : (
-        <button onClick={toggleReload} style={{ marginRight: "5px" }}>
+        <button onClick={toggleReload} style={{ marginRight: '5px' }}>
           Start reload
         </button>
       )}
-      <button onClick={sendRestart}>Send restart</button>
-    </>
+      <button onClick={() => sendMessage({ restart: true })}>Send restart</button>
+
+      <button onClick={() => sendMessage({ notification: true })}>Grant notification permission</button>
+    </div>
   );
 };
 
@@ -78,5 +47,5 @@ ReactDOM.render(
   <React.StrictMode>
     <Popup />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

@@ -1,3 +1,4 @@
+import { sendMessage } from './sendMessage';
 function polling() {
   // console.log("polling");
   setTimeout(polling, 1000 * 30);
@@ -6,7 +7,7 @@ function polling() {
 polling();
 
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (info.status === "complete" && tab.active) {
-    chrome.tabs.sendMessage(tabId, { get: "body" });
+  if (info.status === 'complete' && tab.active) {
+    sendMessage({ get: 'body' });
   }
 });
