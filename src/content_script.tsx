@@ -69,12 +69,13 @@ const checkInNodes = (collection: HTMLCollectionOf<Element>) => {
 };
 
 const sendNotification = (word: string) => {
+  const notification = 'Found word "' + word + '"';
   if ('Notification' in window) {
     if (window.Notification.permission != 'granted')
       window.Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') new window.Notification('Found ' + word);
+        if (permission === 'granted') new window.Notification(notification);
       });
-    else if (window.Notification.permission === 'granted') new window.Notification('Found ' + word);
+    else if (window.Notification.permission === 'granted') new window.Notification(notification);
   }
 };
 
