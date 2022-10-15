@@ -7,7 +7,7 @@ function polling() {
 polling();
 
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (info.status === 'complete' && tab.active) {
+  if (info.status === 'complete') {
     sendMessage({ get: 'body' });
   }
 });

@@ -1,7 +1,7 @@
 let stopped = false;
 let found = false;
 
-const words = ['libera', 'singola', 'camera', 'disponibile', 'affittasi'];
+const words = ['liber', 'singol', 'camer'];
 const tabooWords = ['coinquilina', 'studentessa'];
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -61,6 +61,7 @@ const checkInNodes = (collection: HTMLCollectionOf<Element>) => {
               (element as HTMLElement).style.borderRadius = '10px';
               window.scrollTo(0, element.getBoundingClientRect().top);
               console.log('found ' + word + ', I stopped reloading\n Click restart to continue searching');
+              console.log(element);
               sendNotification(word);
             }
           }
