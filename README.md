@@ -1,3 +1,7 @@
+# Web Alert
+
+A web extension that refreshes the window and alerts you if it founds what you're looking for
+
 ## Setup
 
 ```

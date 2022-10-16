@@ -1,7 +1,7 @@
 {
-  "name": "facebook-alert",
+  "name": "web-alert",
   "version": "1.0.0",
-  "description": "facebook-alert",
+  "description": "A web extension that refreshes the window and alerts you if it founds what you're looking for",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --config webpack/webpack.dev.js --watch",
@@ -10,11 +10,11 @@
     "test": "npx jest",
     "style": "prettier --write \"src/**/*.{ts,tsx}\""
   },
-  "author": "",
+  "author": "Michele Pulvirenti",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chibat/facebook-alert.git"
+    "url": "https://github.com/mikecheek/web-alert.git"
   },
   "dependencies": {
     "react": "^17.0.1",
