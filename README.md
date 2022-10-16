@@ -2,40 +2,6 @@
 
 A web extension that refreshes the window and alerts you if it founds what you're looking for
 
-## Setup
+The code is runned every minute
 
-```
-npm install
-```
-
-## Import as Visual Studio Code project
-
-...
-
-## Build
-
-```
-npm run build
-```
-
-## Build in watch mode
-
-### terminal
-
-```
-npm run watch
-```
-
-### Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
-
-## Load extension to chrome
-
-Load `dist` directory
-
-## Test
-
-`npx jest` or `npm run test`
+For now you have to manually put words in the code and the popup window has to be opened to periodically run the script
