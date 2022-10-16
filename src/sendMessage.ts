@@ -3,9 +3,8 @@ export const sendMessage = (message: any) => {
     const tab = tabs[0];
     if (tab.id) {
       chrome.tabs.sendMessage(tab.id, message, (msg) => {
-        console.log('result message:', msg);
+        console.log('result message: ', msg);
       });
     }
   });
 };
-
