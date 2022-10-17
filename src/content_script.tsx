@@ -51,6 +51,7 @@ const removeItems = () => {
 };
 
 const checkInNodes = (coll: HTMLCollectionOf<Element>): [HTMLElement | undefined, string | undefined] => {
+  const start = Date.now();
   console.log('Looking for your words...');
   const collection = coll as HTMLCollectionOf<HTMLElement>;
   found = false;
@@ -93,6 +94,8 @@ const checkInNodes = (coll: HTMLCollectionOf<Element>): [HTMLElement | undefined
           }
         });
     });
+  const end = Date.now();
+  stats.timeRunned = `${(end - start) / 1000} s`;
   printStats(stats);
   return [elementFound, wordFound];
 };

@@ -10,7 +10,7 @@ export interface Stats {
   filteredElements: number;
   wordsLoop: number;
   tabooWordsLoop: number;
+  timeRunned: string;
   filteringEfficency: string;
   algorithmEfficency: string;
 }
-
