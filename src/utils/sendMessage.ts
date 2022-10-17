@@ -1,4 +1,4 @@
-export const sendMessage = (message: any) => {
+const sendMessage = (message: any) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
     if (tab.id) {
@@ -8,3 +8,5 @@ export const sendMessage = (message: any) => {
     }
   });
 };
+
+export default sendMessage;
