@@ -5,3 +5,12 @@ export interface Msg {
   notification?: boolean;
 }
 
+export interface Stats {
+  elements: number;
+  filteredElements: number;
+  wordsLoop: number;
+  tabooWordsLoop: number;
+  filteringEfficency: string;
+  algorithmEfficency: string;
+}
+

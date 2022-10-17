@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { sendMessage } from './sendMessage';
+import sendMessage from './utils/sendMessage';
 
 const Popup = () => {
   const [reload, setReload] = useState<boolean>(false);
